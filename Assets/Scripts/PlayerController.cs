@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,6 +40,13 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit(Collision collision) {
         if (collision.gameObject.tag == "Ground") {
             mCanJump = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Obstacle") {
+            SceneManager.LoadScene("Game");
         }
     }
 }
