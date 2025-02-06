@@ -1,15 +1,21 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject obstacle;
     public Transform spawnPoint;
+    public TextMeshProUGUI scoreText;
+    public GameObject playButton;
+    public GameObject player;
+
     int score = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameStart();
+
     }
 
     // Update is called once per frame
@@ -28,7 +34,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ScoreUp() {
+        score++;
+        scoreText.text = score.ToString();
+    }
+
     public void GameStart() {
+        scoreText.text = score.ToString();
+        player.SetActive(true);
+        playButton.SetActive(false);
         StartCoroutine("SpawnObstacles");
+        InvokeRepeating("ScoreUp", 2f, 1f);
     }
 }
